@@ -30,7 +30,7 @@ const validateMovie = (req, res, next) => {
   }
   if (color == null) {
     errors.push({ field: "color", message: "This field is required" });
-  } else if (color !== 0 || color !== 1) {
+  } else if (color !== 0 && color !== 1) {
     errors.push({
       field: "color",
       message: "Should be 0 or 1",
