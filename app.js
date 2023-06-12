@@ -24,15 +24,18 @@ app.post("/api/movies", validateMovie, movieHandlers.postMovie);
 
 app.put("/api/movies/:id", validateMovie, movieHandlers.updateMovie);
 
+// --- Users ---
+
 const userHandlers = require("./userHandlers");
 const { validateUser } = require("./validators.js");
+const { hashPassword } = require("./auth.js");
 
 app.get("/api/users", userHandlers.getUsers);
 app.get("/api/users/:id", userHandlers.getUserById);
 
-app.post("/api/users", validateUser, userHandlers.postUser);
+app.post("/api/users", validateUser, hashPassword, userHandlers.postUser);
 
-app.put("/api/users/:id", validateUser, userHandlers.updateUser);
+app.put("/api/users/:id", validateUser, hashPassword, userHandlers.updateUser);
 
 app.listen(port, (err) => {
   if (err) {
